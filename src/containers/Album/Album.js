@@ -7,6 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import {makeStyles} from '@material-ui/core/styles';
+import SimpleModal from "../../components/Modal/Modal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,11 +29,16 @@ const Album = props => {
     }, [dispatch, props.match.params.id]);
 
     const trackList = tracks.map(track => {
+
         return (
             <div key={track._id}>
                 <ListItem button>
                     <ListItemText primary={track.number + ' ' + track.name}/>
-                    <ListItemText primary={track.duration}/>
+                    <ListItemText primary={track.duration} style={{textAlign: "right"}}/>
+                     <SimpleModal
+                        video={track.youtube}
+                        on={!track.youtube}
+                     />
                 </ListItem>
                 <Divider />
             </div>
@@ -46,6 +52,7 @@ const Album = props => {
             <List component="nav" className={classes.root} aria-label="mailbox folders">
                 {trackList}
             </List>
+
         </Container>
     );
 };
