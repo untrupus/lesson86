@@ -119,7 +119,7 @@ const SignUp = () => {
                     </Button>
                     <Grid container >
                         <Grid item className={classes.login}>
-                            <Link component={RouterLink}  to="/" >
+                            <Link component={RouterLink}  to="/signin" >
                                 {"Already have an account? Sign In"}
                             </Link>
                         </Grid>

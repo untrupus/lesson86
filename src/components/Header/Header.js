@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import Container from "@material-ui/core/Container";
 import {Link as RouterLink} from "react-router-dom";
 import Link from '@material-ui/core/Link';
+import {useSelector} from "react-redux";
+import UserMenu from "../Menu/Menu";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
     const classes = useStyles();
+    const user = useSelector(state => state.users.user);
+
     return (
         <AppBar position="static">
             <Container maxWidth="lg">
@@ -36,9 +40,14 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         <Link component={RouterLink} className={classes.logo} to="/">Last.FM</Link>
                     </Typography>
-                    <Button color="inherit">
-                        <Link component={RouterLink} className={classes.logo} to="/signup">Sign up</Link>
-                    </Button>
+                    {!user ?
+                        <Button color="inherit">
+                            <Link component={RouterLink} className={classes.logo} to="/signin">Sign in</Link>
+                        </Button> :
+                        <UserMenu
+                            name={user.user.username}
+                        />
+                    }
                 </Toolbar>
             </Container>
         </AppBar>
