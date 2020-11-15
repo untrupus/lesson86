@@ -4,8 +4,9 @@ import {
     FETCH_ARTIST_SUCCESS,
     FETCH_ARTIST_ERROR,
     FETCH_TRACKS_ERROR,
-    FETCH_TRACKS_SUCCESS
-} from "./actionTypes";
+    FETCH_TRACKS_SUCCESS,
+
+} from "../actionTypes";
 
 const initialState = {
     artists: [],
@@ -13,10 +14,10 @@ const initialState = {
     tracks: [],
     artist: '',
     album: '',
-    error: null
+    error: null,
 };
 
-const reducer = (state = initialState, action) => {
+const artistsReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_ARTISTS_SUCCESS:
             return {...state, artists: action.value, albums: [], artist: '', album: ''};
@@ -41,4 +42,4 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export default reducer;
+export default artistsReducer;

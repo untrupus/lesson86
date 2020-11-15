@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchArtist} from "../../store/actions";
+import {fetchArtist} from "../../store/actions/artistsActions";
 import SingleAlbum from "../../components/SingleAlbum/SingleAlbum";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,8 +16,8 @@ const useStyles = makeStyles(() => ({
 
 const Artist = props => {
     const classes = useStyles();
-    const albums = useSelector(state => state.albums);
-    const artist = useSelector(state => state.artist);
+    const albums = useSelector(state => state.artists.albums);
+    const artist = useSelector(state => state.artists.artist);
     const dispatch = useDispatch();
 
     useEffect(() => {

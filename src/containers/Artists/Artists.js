@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {fetchArtists} from "../../store/actions";
+import {fetchArtists} from "../../store/actions/artistsActions";
 import SingleArtist from "../../components/SingleArtist/SingleArtist";
 import {useSelector, useDispatch} from "react-redux";
 import {makeStyles} from '@material-ui/core/styles';
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Artists = () => {
     const classes = useStyles();
-    const artists = useSelector(state => state.artists);
+    const artists = useSelector(state => state.artists.artists);
     const dispatch = useDispatch();
 
     useEffect(() => {

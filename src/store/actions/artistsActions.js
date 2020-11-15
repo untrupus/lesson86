@@ -4,10 +4,11 @@ import {
     FETCH_ARTIST_ERROR,
     FETCH_ARTIST_SUCCESS,
     FETCH_TRACKS_ERROR,
-    FETCH_TRACKS_SUCCESS
-} from "./actionTypes";
+    FETCH_TRACKS_SUCCESS,
 
-import axiosAPI from "../axiosAPI";
+} from "../actionTypes";
+
+import axiosAPI from "../../axiosAPI";
 
 
 const fetchArtistsSuccess = value => {
@@ -66,3 +67,5 @@ export const fetchTracks = (id) => {
         }
     };
 };
+
+

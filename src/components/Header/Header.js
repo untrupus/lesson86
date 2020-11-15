@@ -36,7 +36,9 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         <Link component={RouterLink} className={classes.logo} to="/">Last.FM</Link>
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit">
+                        <Link component={RouterLink} className={classes.logo} to="/signup">Sign up</Link>
+                    </Button>
                 </Toolbar>
             </Container>
         </AppBar>
