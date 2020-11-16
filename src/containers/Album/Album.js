@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTracks} from "../../store/actions/artistsActions";
+import {addTrack} from "../../store/actions/usersAction";
 import Container from "@material-ui/core/Container";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -28,10 +29,17 @@ const Album = props => {
         dispatch(fetchTracks(props.match.params.id));
     }, [dispatch, props.match.params.id]);
 
+    const addTrackHandler = trackId => {
+        dispatch(addTrack(trackId));
+    };
+
     const trackList = tracks.map(track => {
 
         return (
-            <div key={track._id}>
+            <div
+                key={track._id}
+                onClick={() => addTrackHandler({track: track._id})}
+            >
                 <ListItem button>
                     <ListItemText primary={track.number + ' ' + track.name}/>
                     <ListItemText primary={track.duration} style={{textAlign: "right"}}/>

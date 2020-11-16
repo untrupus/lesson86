@@ -3,11 +3,19 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {makeStyles} from '@material-ui/core/styles';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import {Link as RouterLink} from "react-router-dom";
+import Link from '@material-ui/core/Link';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     menu: {
         color: "white",
         fontWeight: "bold",
+    },
+    history: {
+        '&:hover': {
+            textDecoration: "none"
+        }
     }
 }));
 
@@ -31,6 +39,7 @@ const UserMenu = props => {
                     className={classes.menu}
             >
                 Hello, {props.name}
+                <AccountCircleIcon/>
             </Button>
             <Menu
                 id="simple-menu"
@@ -40,7 +49,9 @@ const UserMenu = props => {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>
+                    <Link component={RouterLink} className={classes.history} to="/history">My track history</Link>
+                </MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
         </div>

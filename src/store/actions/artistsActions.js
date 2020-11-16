@@ -58,9 +58,12 @@ export const fetchArtist = (id) => {
 };
 
 export const fetchTracks = (id) => {
-    return async dispatch => {
+    return async (dispatch, getState) => {
+        const headers = {
+            "Authorization": getState().users.user && getState().users.user.user.token
+        };
         try {
-            const response = await axiosAPI.get("tracks?album=" + id);
+            const response = await axiosAPI.get("tracks?album=" + id, {headers});
             dispatch(fetchTracksSuccess(response.data));
         } catch (e) {
             dispatch(fetchTracksError(e));

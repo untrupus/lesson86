@@ -6,6 +6,7 @@ import Artist from "./containers/Artist/Artist";
 import Album from "./containers/Album/Album";
 import SignUp from "./containers/SignUp/SignUp";
 import SignIn from "./containers/SignIn/SignIp";
+import History from "./containers/History/History";
 import './App.css';
 
 
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/album/:id" component={Album}/>
                 <Route path="/signup" exact component={SignUp}/>
                 <Route path="/signin" exact component={SignIn}/>
+                <Route path="/history" exact component={History}/>
                 <Route render={() => <h1>404</h1>}/>
             </Switch>
     </div>
