@@ -26,7 +26,8 @@ const SingleAlbum = props => {
                 <CardMedia
                     component="img"
                     alt="Album"
-                    height="140"
+                    height="300"
+                    width="300"
                     image={props.src}
                     title="Album"
                 />

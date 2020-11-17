@@ -17,6 +17,10 @@ const useStyles = makeStyles({
         width: 345,
         marginBottom: "20px"
     },
+    name: {
+        textTransform: "uppercase",
+        fontWeight: "bold"
+    }
 });
 
 const SingleArtist = props => {
@@ -29,12 +33,12 @@ const SingleArtist = props => {
                     <CardMedia
                         component="img"
                         alt="Contemplative Reptile"
-                        height="140"
+                        height="240"
                         image={props.src}
                         title="Contemplative Reptile"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h3">
+                        <Typography gutterBottom variant="h5" component="h3" className={classes.name}>
                             {props.name}
                         </Typography>
                     </CardContent>

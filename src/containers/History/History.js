@@ -34,21 +34,25 @@ const History = () => {
         }
     }, [dispatch, user]);
 
-const historyList = trackHistory.map(track => {
-    return (
-        <div
-            key={track._id}
-        >
-            <ListItem button>
-                <ListItemText primary={track.track.album.artist.name}/>
-                <ListItemText primary={track.track.name}/>
-                <ListItemText primary={track.datetime.slice(0, -27)
-                } style={{textAlign: "right"}}/>
-            </ListItem>
-            <Divider />
-        </div>
-    )
-})
+    let historyList;
+    if (trackHistory) {
+        historyList = trackHistory.map(track => {
+            console.log(track.datetime);
+            return (
+                <div
+                    key={track._id}
+                >
+                    <ListItem button>
+                        <ListItemText primary={track.track.album.artist.name}/>
+                        <ListItemText primary={track.track.name}/>
+                        <ListItemText primary={track.datetime.slice(0, -27)
+                        } style={{textAlign: "right"}}/>
+                    </ListItem>
+                    <Divider/>
+                </div>
+            )
+        });
+    }
 
     return (
         <Container maxWidth="lg" className={classes.container}>
