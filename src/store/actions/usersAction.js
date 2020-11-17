@@ -6,7 +6,8 @@ import {
     LOGIN_USER_SUCCESS,
     ADD_TRACK_FAILURE,
     FETCH_HISTORY_ERROR,
-    FETCH_HISTORY_SUCCESS
+    FETCH_HISTORY_SUCCESS,
+    LOGOUT_USER
 } from "../actionTypes";
 import axios from "../../axiosAPI";
 
@@ -90,4 +91,15 @@ export const fetchHistory = () => {
             dispatch(fetchHistoryError(e));
         }
     }
+};
+
+export const logoutUser = () => {
+    return async (dispatch, getState) => {
+        const token = getState().users.user.token;
+        const headers = {"Authorization": token};
+
+        await axios.delete("/users/sessions", {headers});
+        dispatch({type: LOGOUT_USER});
+        dispatch(push("/"));
+    };
 };

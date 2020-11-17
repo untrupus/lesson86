@@ -5,7 +5,8 @@ import {
     LOGIN_USER_FAILURE,
     ADD_TRACK_FAILURE,
     FETCH_HISTORY_ERROR,
-    FETCH_HISTORY_SUCCESS
+    FETCH_HISTORY_SUCCESS,
+    LOGOUT_USER
 } from "../actionTypes";
 
 const initialState = {
@@ -33,6 +34,8 @@ const usersReducer = (state = initialState, action) => {
             return {...state, historyError: action.error};
         case FETCH_HISTORY_SUCCESS:
             return {...state, trackHistory: action.data};
+        case LOGOUT_USER:
+            return {...state, user: null};
         default:
             return state;
     }
