@@ -28,8 +28,6 @@ const usersReducer = (state = initialState, action) => {
             return {...state, loginError: action.error};
         case LOGIN_USER_SUCCESS:
             return {...state, user: action.user, loginError: null};
-        case ADD_TRACK_FAILURE:
-            return {...state, addTrackError: action.error};
         case FETCH_HISTORY_ERROR:
             return {...state, historyError: action.error};
         case FETCH_HISTORY_SUCCESS:

@@ -8,6 +8,7 @@ import {Link as RouterLink} from "react-router-dom";
 import Link from '@material-ui/core/Link';
 import {useDispatch} from "react-redux";
 import {logoutUser} from "../../store/actions/usersAction";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 const useStyles = makeStyles(() => ({
     menu: {
@@ -39,6 +40,12 @@ const UserMenu = props => {
       dispatch(logoutUser());
     };
 
+    let icon;
+    if (props.role === "admin") {
+        icon = <SupervisorAccountIcon/>
+    } else {
+        icon = <AccountCircleIcon/>
+    }
     return (
         <div>
             <Button aria-controls="simple-menu"
@@ -46,8 +53,8 @@ const UserMenu = props => {
                     onClick={handleClick}
                     className={classes.menu}
             >
-                Hello, {props.name}
-                <AccountCircleIcon/>
+                Hello, {props.name} &#160;
+                {icon}
             </Button>
             <Menu
                 id="simple-menu"

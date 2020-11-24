@@ -63,7 +63,7 @@ export const addTrack = trackId => {
             "Authorization": getState().users.user && getState().users.user.user.token
         };
         try {
-             await axios.post("/users/track_history", trackId, {headers})
+             await axios.post("/histories/track_history", trackId, {headers})
         } catch (e) {
             dispatch(addTrackFailure(e));
         }
@@ -83,7 +83,7 @@ export const fetchHistory = () => {
         const headers = {
             "Authorization": getState().users.user && getState().users.user.user.token };
         try {
-           const response = await axios("/users/track_history", {headers});
+           const response = await axios("/histories/track_history", {headers});
             console.log(response);
             dispatch(fetchHistorySuccess(response.data));
 

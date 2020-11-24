@@ -5,7 +5,9 @@ import {
     FETCH_ARTIST_ERROR,
     FETCH_TRACKS_ERROR,
     FETCH_TRACKS_SUCCESS,
-
+    ADD_ARTIST_ERROR,
+    ADD_ALBUM_ERROR,
+    ADD_TRACK_ERROR
 } from "../actionTypes";
 
 const initialState = {
@@ -15,6 +17,9 @@ const initialState = {
     artist: '',
     album: '',
     error: null,
+    addArtistError: null,
+    addAlbumError: null,
+    addTrackError: null
 };
 
 const artistsReducer = (state = initialState, action) => {
@@ -37,6 +42,12 @@ const artistsReducer = (state = initialState, action) => {
             };
         case FETCH_TRACKS_ERROR:
             return {...state, error: action.error};
+        case ADD_ARTIST_ERROR:
+            return {...state, addArtistError: action.error};
+        case ADD_ALBUM_ERROR:
+            return {...state, addAlbumError: action.error};
+        case ADD_TRACK_ERROR:
+            return {...state, addTrackError: action.error};
         default:
             return state;
     }

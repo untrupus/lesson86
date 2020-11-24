@@ -9,17 +9,22 @@ import {Link as RouterLink} from "react-router-dom";
 import Link from '@material-ui/core/Link';
 import {useSelector} from "react-redux";
 import UserMenu from "../Menu/Menu";
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
+    header: {
+        display: "flex",
+        justifyContent: "space-between"
     },
     menuButton: {
         marginRight: theme.spacing(2),
     },
-    title: {
-        flexGrow: 1,
+    link: {
+        display: 'flex',
+        color: "white",
+        textTransform: "uppercase",
+        fontSize: "15px",
     },
     logo: {
         color: "white",
@@ -36,17 +41,42 @@ const Header = () => {
 
     return (
         <AppBar position="static">
-            <Container maxWidth="lg">
-                <Toolbar>
+            <Container maxWidth="lg" >
+                <Toolbar className={classes.header}>
                     <Typography variant="h6" className={classes.title}>
                         <Link component={RouterLink} className={classes.logo} to="/">Last.FM</Link>
                     </Typography>
+                    {user ? <Breadcrumbs aria-label="breadcrumb">
+                        <Link
+                            className={classes.link}
+                            component={RouterLink}
+                            to="/addartist"
+                        >
+                            Add Artist
+                        </Link>
+                        <Link
+                            className={classes.link}
+                            component={RouterLink}
+                            to="addalbum"
+                        >
+                            Add Album
+                        </Link>
+                        <Link className={classes.link}
+                              component={RouterLink}
+                              to="/addtrack"
+                        >
+                            Add Track
+                        </Link>
+                    </Breadcrumbs> : null}
                     {!user ?
                         <Button color="inherit">
-                            <Link component={RouterLink} className={classes.logo} to="/signin">Sign in</Link>
+                            <Link component={RouterLink} className={classes.logo} to="/signin">Sign in </Link>
+                            <span className={classes.logo}>&#160;/&#160;</span>
+                            <Link component={RouterLink} className={classes.logo} to="/signup"> Sign up</Link>
                         </Button> :
                         <UserMenu
                             name={user.user.username}
+                            role={user.user.role}
                         />
                     }
                 </Toolbar>

@@ -7,8 +7,9 @@ import Album from "./containers/Album/Album";
 import SignUp from "./containers/SignUp/SignUp";
 import SignIn from "./containers/SignIn/SignIp";
 import History from "./containers/History/History";
-import './App.css';
-
+import AddAlbum from "./containers/AddAlbum/AddAlbum";
+import AddArtist from "./containers/AddArtist/AddArtist";
+import AddTrack from "./containers/AddTrack/AddTrack";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
                 <Route path="/album/:id" component={Album}/>
                 <Route path="/signup" exact component={SignUp}/>
                 <Route path="/signin" exact component={SignIn}/>
+                <Route path="/addartist" exact component={AddArtist}/>
+                <Route path="/addalbum" exact component={AddAlbum}/>
+                <Route path="/addtrack" exact component={AddTrack}/>
                 <Route path="/history" exact component={History}/>
                 <Route render={() => <h1>404</h1>}/>
             </Switch>
