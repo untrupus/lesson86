@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {addTrack, fetchArtists, fetchArtist} from "../../store/actions/artistsActions";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -53,7 +54,8 @@ const AddTrack = () => {
         duration: '',
         album: '',
         artist: '',
-        number: ''
+        number: '',
+        youtube: ''
     });
 
     const dispatch = useDispatch();
@@ -79,11 +81,7 @@ const AddTrack = () => {
 
     const formSubmit = (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        Object.keys(state).forEach(key => {
-            formData.append(key, state[key]);
-        });
-        dispatch(addTrack(formData));
+        dispatch(addTrack(state));
     };
 
     const getFieldError = fieldName => {
@@ -165,6 +163,20 @@ const AddTrack = () => {
                             onChange={inputChangeHandler}
                             autoComplete="number"
                         />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            fullWidth
+                            name="youtube"
+                            label="YouTube"
+                            type="youtube"
+                            id="youtube"
+                            error={!!getFieldError("youtube")}
+                            helperText={getFieldError("youtube")}
+                            value={state.youtube}
+                            onChange={inputChangeHandler}
+                            autoComplete="youtube"
+                        />
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Artist</InputLabel>
                             <Select
@@ -175,11 +187,12 @@ const AddTrack = () => {
                                 onChange={inputChangeHandler}
                                 label="Artist"
                                 name="artist"
-                                error={!!getFieldError("artist")}
-                                helperText={getFieldError("artist")}
+                                // error={!!getFieldError("artist")}
+                                // helpertext={getFieldError("artist")}
                             >
                                 {artistSelect}
                             </Select>
+                            <FormHelperText>{getFieldError("artist")}</FormHelperText>
                         </FormControl>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Album</InputLabel>
@@ -191,8 +204,6 @@ const AddTrack = () => {
                                 onChange={inputChangeHandler}
                                 label="Album"
                                 name="album"
-                                error={!!getFieldError("album")}
-                                helperText={getFieldError("album")}
                             >
                                 {albumSelect}
                             </Select>

@@ -148,7 +148,6 @@ const AddAlbum = () => {
                             variant="outlined"
                             margin="normal"
                             fullWidth
-                            label="Image"
                             name="image"
                             type="file"
                             ref={inputRef}

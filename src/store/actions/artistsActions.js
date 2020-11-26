@@ -7,7 +7,13 @@ import {
     FETCH_TRACKS_SUCCESS,
     ADD_ALBUM_ERROR,
     ADD_ARTIST_ERROR,
-    ADD_TRACK_ERROR
+    ADD_TRACK_ERROR,
+    DELETE_ARTIST_ERROR,
+    DELETE_ALBUM_ERROR,
+    DELETE_TRACK_ERROR,
+    PUBLIC_ALBUM_ERROR,
+    PUBLIC_ARTIST_ERROR,
+    PUBLIC_TRACK_ERROR
 } from "../actionTypes";
 import {push} from "connected-react-router";
 import axiosAPI from "../../axiosAPI";
@@ -52,7 +58,11 @@ export const fetchArtist = (id) => {
     return async dispatch => {
         try {
             const response = await axiosAPI.get("albums?artist=" + id);
-            dispatch(fetchArtistSuccess(response.data));
+            if (response.data.length === 0) {
+                dispatch(push('/'));
+            } else {
+                dispatch(fetchArtistSuccess(response.data));
+            }
         } catch (e) {
             dispatch(fetchArtistError(e));
         }
@@ -60,13 +70,14 @@ export const fetchArtist = (id) => {
 };
 
 export const fetchTracks = (id) => {
-    return async (dispatch, getState) => {
-        const headers = {
-            "Authorization": getState().users.user && getState().users.user.user.token
-        };
+    return async (dispatch) => {
         try {
-            const response = await axiosAPI.get("tracks?album=" + id, {headers});
-            dispatch(fetchTracksSuccess(response.data));
+            const response = await axiosAPI.get("tracks?album=" + id);
+            if (response.data.length === 0) {
+                dispatch(push('/'));
+            } else {
+                dispatch(fetchTracksSuccess(response.data));
+            }
         } catch (e) {
             dispatch(fetchTracksError(e));
         }
@@ -84,12 +95,9 @@ const addTrackError = error => {
 };
 
 export const addArtist = (data) => {
-    return async (dispatch, getState) => {
-        const headers = {
-            "Authorization": getState().users.user && getState().users.user.user.token
-        };
+    return async (dispatch) => {
         try {
-            await axiosAPI.post('/artists', data, {headers});
+            await axiosAPI.post('/artists', data);
             dispatch(addArtistError(null));
             dispatch(push("/"));
         } catch (e) {
@@ -99,12 +107,9 @@ export const addArtist = (data) => {
 };
 
 export const addAlbum = (data) => {
-    return async (dispatch, getState) => {
-        const headers = {
-            "Authorization": getState().users.user && getState().users.user.user.token
-        };
+    return async (dispatch) => {
         try {
-            await axiosAPI.post('/albums', data, {headers});
+            await axiosAPI.post('/albums', data);
             dispatch(addAlbumError(null));
             dispatch(push("/"));
         } catch (e) {
@@ -114,16 +119,98 @@ export const addAlbum = (data) => {
 };
 
 export const addTrack = (data) => {
-    return async (dispatch, getState) => {
-        const headers = {
-            "Authorization": getState().users.user && getState().users.user.user.token
-        };
+    return async (dispatch) => {
         try {
-            await axiosAPI.post('/tracks', data, {headers});
+            await axiosAPI.post('/tracks', data);
             dispatch(addTrackError(null));
             dispatch(push("/"));
         } catch (e) {
             dispatch(addTrackError(e.response.data));
+        }
+    };
+};
+
+const deleteArtistError = (error) => {
+    return {type: DELETE_ARTIST_ERROR, error}
+};
+
+const deleteAlbumError = (error) => {
+    return {type: DELETE_ALBUM_ERROR, error}
+};
+
+const deleteTrackError = (error) => {
+    return {type: DELETE_TRACK_ERROR, error}
+};
+
+export const deleteArtist = (id) => {
+    return async (dispatch) => {
+        try {
+            await axiosAPI.delete('/artists/' + id);
+            dispatch(push("/"));
+        } catch (e) {
+            dispatch(deleteArtistError(e));
+        }
+    };
+};
+
+export const deleteAlbum = (id) => {
+    return async (dispatch) => {
+        try {
+            await axiosAPI.delete('/albums/' + id);
+        } catch (e) {
+            dispatch(deleteAlbumError(e));
+        }
+    };
+};
+
+export const deleteTrack = (id) => {
+    return async (dispatch) => {
+        try {
+            await axiosAPI.delete('/tracks/' + id);
+        } catch (e) {
+            dispatch(deleteTrackError(e));
+        }
+    };
+};
+
+const publicArtistError = (error) => {
+    return {type: PUBLIC_ARTIST_ERROR, error}
+};
+
+const publicAlbumError = (error) => {
+    return {type: PUBLIC_ALBUM_ERROR, error}
+};
+
+const publicTrackError = (error) => {
+    return {type: PUBLIC_TRACK_ERROR, error}
+};
+
+export const publicTrack = (id) => {
+    return async (dispatch) => {
+        try {
+            await axiosAPI.patch('/tracks/' + id, {published: true});
+        } catch (e) {
+            dispatch(publicTrackError(e));
+        }
+    };
+};
+
+export const publicAlbum = (id) => {
+    return async (dispatch) => {
+        try {
+            await axiosAPI.patch('/albums/' + id, {published: true});
+        } catch (e) {
+            dispatch(publicAlbumError(e));
+        }
+    };
+};
+
+export const publicArtist = (id) => {
+    return async (dispatch) => {
+        try {
+            await axiosAPI.patch('/artists/' + id, {published: true});
+        } catch (e) {
+            dispatch(publicArtistError(e));
         }
     };
 };

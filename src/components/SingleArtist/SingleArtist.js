@@ -10,8 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import {Link as RouterLink} from "react-router-dom";
 import Link from '@material-ui/core/Link';
 
-
-
 const useStyles = makeStyles({
     root: {
         width: 345,
@@ -39,6 +37,7 @@ const SingleArtist = props => {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h3" className={classes.name}>
+                            {props.timer}
                             {props.name}
                         </Typography>
                     </CardContent>
@@ -47,6 +46,8 @@ const SingleArtist = props => {
                     <Button size="small" color="primary" onClick={props.click}>
                         <Link component={RouterLink}  to={'/artist/' + props.id}>Discography</Link>
                     </Button>
+                    {props.add}
+                    {props.delete}
                 </CardActions>
             </Card>
         </>

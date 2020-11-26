@@ -46,7 +46,7 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         <Link component={RouterLink} className={classes.logo} to="/">Last.FM</Link>
                     </Typography>
-                    {user ? <Breadcrumbs aria-label="breadcrumb">
+                    {(user && user.user.role === "user") ? <Breadcrumbs aria-label="breadcrumb">
                         <Link
                             className={classes.link}
                             component={RouterLink}

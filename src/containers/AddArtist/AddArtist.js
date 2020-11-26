@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {addArtist} from "../../store/actions/artistsActions";
 
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -112,9 +113,9 @@ const AddArtist = () => {
                             variant="outlined"
                             margin="normal"
                             fullWidth
-                            label="Image"
                             name="image"
                             type="file"
+                            placeholder="image"
                             ref={inputRef}
                             id="image"
                             onChange={fileChangeHandler}

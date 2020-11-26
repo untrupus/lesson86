@@ -33,6 +33,7 @@ const SingleAlbum = props => {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
+                        {props.timer}
                         {props.name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
@@ -44,6 +45,8 @@ const SingleAlbum = props => {
                 <Button size="small" color="primary">
                     <Link component={RouterLink}  to={'/album/' + props.id}>Tracks</Link>
                 </Button>
+                {props.add}
+                {props.delete}
             </CardActions>
         </Card>
     );

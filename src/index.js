@@ -6,8 +6,16 @@ import store, {history} from "./store/configureStore";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axiosAPI from "./axiosAPI";
 
-
+axiosAPI.interceptors.request.use(config => {
+    try {
+        config.headers['Authorization'] = store.getState().users.user.user.token;
+    } catch(e) {
+        // no token exists
+    }
+    return config;
+});
 
 ReactDOM.render(
     <Provider store={store}>
