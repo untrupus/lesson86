@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {deleteAlbum, fetchArtist, publicAlbum} from "../../store/actions/artistsActions";
+import {fetchArtist} from "../../store/actions/artistsActions";
+import {publicAlbum, deleteAlbum} from "../../store/actions/adminActions";
 import SingleAlbum from "../../components/SingleAlbum/SingleAlbum";
 import Container from "@material-ui/core/Container";
 import {makeStyles} from '@material-ui/core/styles';

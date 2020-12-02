@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {deleteTrack, fetchTracks, publicTrack} from "../../store/actions/artistsActions";
+import {deleteTrack, publicTrack} from "../../store/actions/adminActions";
+import {fetchTracks} from "../../store/actions/artistsActions";
 import {addTrack} from "../../store/actions/usersAction";
 import Container from "@material-ui/core/Container";
 import List from '@material-ui/core/List';

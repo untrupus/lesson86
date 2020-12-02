@@ -116,6 +116,8 @@ const AddArtist = () => {
                             name="image"
                             type="file"
                             placeholder="image"
+                            error={!!getFieldError("image")}
+                            helperText={getFieldError("image")}
                             ref={inputRef}
                             id="image"
                             onChange={fileChangeHandler}

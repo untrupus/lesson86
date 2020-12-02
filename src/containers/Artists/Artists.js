@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {fetchArtists, deleteArtist, publicArtist} from "../../store/actions/artistsActions";
+import {fetchArtists} from "../../store/actions/artistsActions";
+import {deleteArtist, publicArtist} from "../../store/actions/adminActions"
 import SingleArtist from "../../components/SingleArtist/SingleArtist";
 import {useSelector, useDispatch} from "react-redux";
 import {makeStyles} from '@material-ui/core/styles';
