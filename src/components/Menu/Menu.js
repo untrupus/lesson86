@@ -3,12 +3,10 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {makeStyles} from '@material-ui/core/styles';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import {Link as RouterLink} from "react-router-dom";
 import Link from '@material-ui/core/Link';
 import {useDispatch} from "react-redux";
 import {logoutUser} from "../../store/actions/usersAction";
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 const useStyles = makeStyles(() => ({
     menu: {
@@ -19,13 +17,30 @@ const useStyles = makeStyles(() => ({
         '&:hover': {
             textDecoration: "none"
         }
+    },
+    username: {
+      marginRight: '15px'
+    },
+    avatar: {
+        width: '40px',
+        height: "40px",
+        borderRadius: "50%",
+        position: "absolute",
+        right: '10px',
+        '&:hover': {
+            width: '150px',
+            height: "150px",
+            top: '5px',
+            right: '80px',
+            zIndex: '99'
+        }
     }
 }));
 
 
 const UserMenu = props => {
     const classes = useStyles();
-    const dispatch =useDispatch();
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -37,15 +52,22 @@ const UserMenu = props => {
     };
 
     const logout = () => {
-      dispatch(logoutUser());
+        dispatch(logoutUser());
     };
 
     let icon;
-    if (props.role === "admin") {
-        icon = <SupervisorAccountIcon/>
+    if (props.image) {
+        icon = <img src={'http://localhost:8000/uploads/' + props.image}
+                    alt="avatar"
+                    className={classes.avatar}
+        />
     } else {
-        icon = <AccountCircleIcon/>
+        icon = <img src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+                    alt="avatar"
+                    className={classes.avatar}
+        />
     }
+
     return (
         <div>
             <Button aria-controls="simple-menu"
@@ -53,9 +75,10 @@ const UserMenu = props => {
                     onClick={handleClick}
                     className={classes.menu}
             >
-                Hello, {props.name} &#160;
-                {icon}
+                <span className={classes.username}>Hello, {props.name} &#160;</span>
+
             </Button>
+            {icon}
             <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}

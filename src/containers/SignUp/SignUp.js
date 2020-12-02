@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -9,7 +9,7 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {registerUser} from "../../store/actions/usersAction";
 
@@ -40,9 +40,12 @@ const useStyles = makeStyles((theme) => ({
 const SignUp = () => {
     const classes = useStyles();
     const [state, setState] = useState({
-       username: '',
-       password: ''
+        username: '',
+        password: '',
+        displayName: '',
+        avatarImage: ''
     });
+    const inputRef = useRef();
 
     const dispatch = useDispatch();
     const error = useSelector(state => state.users.registerError);
@@ -54,25 +57,36 @@ const SignUp = () => {
             return {...prevState, [name]: value};
         });
     };
+    const fileChangeHandler = e => {
+        const name = e.target.name;
+        const file = e.target.files[0];
+        setState(prevState => ({
+            ...prevState, [name]: file
+        }));
+    };
     const formSubmit = (e) => {
-      e.preventDefault();
-      dispatch(registerUser({...state}));
+        e.preventDefault();
+        const formData = new FormData();
+        Object.keys(state).forEach(key => {
+            formData.append(key, state[key]);
+        });
+        dispatch(registerUser(formData));
     };
 
     const getFieldError = fieldName => {
         try {
             return error.errors[fieldName].message;
-        } catch(e) {
+        } catch (e) {
             return undefined;
         }
     };
 
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign up
@@ -97,6 +111,33 @@ const SignUp = () => {
                     <TextField
                         variant="outlined"
                         margin="normal"
+                        error={!!getFieldError("displayName")}
+                        helperText={getFieldError("displayName")}
+                        fullWidth
+                        id="displayName"
+                        label="Display Name"
+                        name="displayName"
+                        value={state.displayName}
+                        onChange={inputChangeHandler}
+                        autoComplete="displayName"
+                        autoFocus
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        name="avatarImage"
+                        type="file"
+                        placeholder="Avatar Image"
+                        error={!!getFieldError("avatarImage")}
+                        helperText={getFieldError("avatarImage")}
+                        ref={inputRef}
+                        id="avatarImage"
+                        onChange={fileChangeHandler}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
                         error={!!getFieldError("password")}
                         helperText={getFieldError("password")}
                         fullWidth
@@ -117,9 +158,9 @@ const SignUp = () => {
                     >
                         Sign Up
                     </Button>
-                    <Grid container >
+                    <Grid container>
                         <Grid item className={classes.login}>
-                            <Link component={RouterLink}  to="/signin" >
+                            <Link component={RouterLink} to="/signin">
                                 {"Already have an account? Sign In"}
                             </Link>
                         </Grid>

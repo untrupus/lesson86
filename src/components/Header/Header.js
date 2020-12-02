@@ -75,8 +75,8 @@ const Header = () => {
                             <Link component={RouterLink} className={classes.logo} to="/signup"> Sign up</Link>
                         </Button> :
                         <UserMenu
-                            name={user.user.username}
-                            role={user.user.role}
+                            name={user.user.displayName}
+                            image={user.user.avatarImage}
                         />
                     }
                 </Toolbar>
