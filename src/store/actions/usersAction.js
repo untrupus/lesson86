@@ -63,7 +63,7 @@ export const addTrack = trackId => {
             "Authorization": getState().users.user && getState().users.user.user.token
         };
         try {
-             await axios.post("/histories/track_history", trackId, {headers})
+            await axios.post("/histories/track_history", trackId, {headers})
         } catch (e) {
             dispatch(addTrackFailure(e));
         }
@@ -81,9 +81,10 @@ const fetchHistoryError = error => {
 export const fetchHistory = () => {
     return async (dispatch, getState) => {
         const headers = {
-            "Authorization": getState().users.user && getState().users.user.user.token };
+            "Authorization": getState().users.user && getState().users.user.user.token
+        };
         try {
-           const response = await axios("/histories/track_history", {headers});
+            const response = await axios("/histories/track_history", {headers});
             console.log(response);
             dispatch(fetchHistorySuccess(response.data));
 
@@ -101,5 +102,18 @@ export const logoutUser = () => {
         await axios.delete("/users/sessions", {headers});
         dispatch({type: LOGOUT_USER});
         dispatch(push("/"));
+    };
+};
+
+export const facebookLogin = data => {
+    return async dispatch => {
+        try {
+            const response = await axios.post('/users/facebookLogin', data);
+            console.log(response);
+            dispatch(loginUserSuccess(response.data));
+            dispatch(push('/'));
+        } catch (e) {
+            dispatch(loginUserFailure(e.response.data));
+        }
     };
 };

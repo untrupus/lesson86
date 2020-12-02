@@ -12,6 +12,7 @@ import Alert from '@material-ui/lab/Alert';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import FacebookLogin from "../../components/FacebookLogin/FacebookLogin";
 import {loginUser} from "../../store/actions/usersAction";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
     },
     login: {
         marginLeft: 'auto',
-        marginRight: 'auto'
+        marginRight: 'auto',
+        marginTop: '10px'
     },
     alert: {
         marginTop: theme.spacing(1),
@@ -120,6 +122,7 @@ const SignIn = () => {
                     >
                         Sign In
                     </Button>
+                    <FacebookLogin/>
                     <Grid container >
                         <Grid item className={classes.login}>
                             <Link component={RouterLink}  to="/signup" >

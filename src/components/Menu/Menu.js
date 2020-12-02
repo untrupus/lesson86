@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
         }
     },
     username: {
-      marginRight: '15px'
+        marginRight: '15px'
     },
     avatar: {
         width: '40px',
@@ -58,6 +58,11 @@ const UserMenu = props => {
     let icon;
     if (props.image) {
         icon = <img src={'http://localhost:8000/uploads/' + props.image}
+                    alt="avatar"
+                    className={classes.avatar}
+        />
+    } else if (props.fbImage) {
+        icon = <img src={props.fbImage}
                     alt="avatar"
                     className={classes.avatar}
         />

@@ -77,6 +77,7 @@ const Header = () => {
                         <UserMenu
                             name={user.user.displayName}
                             image={user.user.avatarImage}
+                            fbImage={user.user.fbAvatar}
                         />
                     }
                 </Toolbar>
