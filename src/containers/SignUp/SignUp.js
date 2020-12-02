@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const SignUp = () => {
     const classes = useStyles();
     const [state, setState] = useState({
-        username: '',
+        email: '',
         password: '',
         displayName: '',
         avatarImage: ''
@@ -97,15 +97,15 @@ const SignUp = () => {
                     <TextField
                         variant="outlined"
                         margin="normal"
-                        error={!!getFieldError("username")}
-                        helperText={getFieldError("username")}
+                        error={!!getFieldError("email")}
+                        helperText={getFieldError("email")}
                         fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        value={state.username}
+                        id="email"
+                        label="Email"
+                        name="email"
+                        value={state.email}
                         onChange={inputChangeHandler}
-                        autoComplete="username"
+                        autoComplete="email"
                         autoFocus
                     />
                     <TextField

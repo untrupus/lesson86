@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = () => {
     const classes = useStyles();
     const [state, setState] = useState({
-        username: '',
+        email: '',
         password: ''
     });
 
@@ -93,12 +93,12 @@ const SignIn = () => {
                         variant="outlined"
                         margin="normal"
                         fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        value={state.username}
+                        id="email"
+                        label="Email"
+                        name="email"
+                        value={state.email}
                         onChange={inputChangeHandler}
-                        autoComplete="username"
+                        autoComplete="email"
                         autoFocus
                     />
                     <TextField
