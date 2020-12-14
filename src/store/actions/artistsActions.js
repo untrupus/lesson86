@@ -53,7 +53,7 @@ export const fetchArtist = (id) => {
         try {
             const response = await axiosAPI.get("albums?artist=" + id);
             if (response.data.length === 0) {
-                dispatch(push('/'));
+                // dispatch(push('/'));
             } else {
                 dispatch(fetchArtistSuccess(response.data));
             }

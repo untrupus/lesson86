@@ -51,6 +51,7 @@ const Header = () => {
                             className={classes.link}
                             component={RouterLink}
                             to="/addartist"
+                            id="artist"
                         >
                             Add Artist
                         </Link>
@@ -58,21 +59,23 @@ const Header = () => {
                             className={classes.link}
                             component={RouterLink}
                             to="addalbum"
+                            id="album"
                         >
                             Add Album
                         </Link>
                         <Link className={classes.link}
                               component={RouterLink}
                               to="/addtrack"
+                              id="track"
                         >
                             Add Track
                         </Link>
                     </Breadcrumbs> : null}
                     {!user ?
                         <Button color="inherit">
-                            <Link component={RouterLink} className={classes.logo} to="/signin">Sign in </Link>
+                            <Link component={RouterLink} className={classes.logo} to="/signin" id="in">Sign in </Link>
                             <span className={classes.logo}>&#160;/&#160;</span>
-                            <Link component={RouterLink} className={classes.logo} to="/signup"> Sign up</Link>
+                            <Link component={RouterLink} className={classes.logo} to="/signup" id="up"> Sign up</Link>
                         </Button> :
                         <UserMenu
                             name={user.user.displayName}

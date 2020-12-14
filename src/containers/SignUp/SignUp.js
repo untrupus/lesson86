@@ -150,6 +150,7 @@ const SignUp = () => {
                         autoComplete="current-password"
                     />
                     <Button
+                        id="signup"
                         type="submit"
                         fullWidth
                         variant="contained"

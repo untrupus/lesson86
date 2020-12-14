@@ -114,6 +114,7 @@ const SignIn = () => {
                         autoComplete="current-password"
                     />
                     <Button
+                        id="signin"
                         type="submit"
                         fullWidth
                         variant="contained"
@@ -137,3 +138,4 @@ const SignIn = () => {
 }
 
 export default SignIn;
+

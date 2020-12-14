@@ -101,6 +101,7 @@ const AddAlbum = () => {
            <MenuItem
                key={artist._id}
                value={artist._id}
+               name={artist.name}
            >{artist.name}</MenuItem>
        )
     });
@@ -154,8 +155,8 @@ const AddAlbum = () => {
                             id="image"
                             onChange={fileChangeHandler}
                         />
-                        <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-outlined-label">Artist</InputLabel>
+                        <FormControl variant="outlined" className={classes.formControl} >
+                            <InputLabel id="demo-simple-select-outlined-label" >Artist</InputLabel>
                             <Select
                                 fullWidth
                                 labelId="demo-simple-select-outlined-label"
@@ -171,6 +172,7 @@ const AddAlbum = () => {
                             </Select>
                         </FormControl>
                         <Button
+                            id="addAlbum"
                             type="submit"
                             variant="contained"
                             color="primary"

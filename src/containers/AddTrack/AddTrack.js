@@ -209,6 +209,7 @@ const AddTrack = () => {
                             </Select>
                         </FormControl>
                         <Button
+                            id="addTrack"
                             type="submit"
                             variant="contained"
                             color="primary"

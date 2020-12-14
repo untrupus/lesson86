@@ -124,6 +124,7 @@ const AddArtist = () => {
                         />
                         <Button
                             type="submit"
+                            id="addArtist"
                             variant="contained"
                             color="primary"
                             className={classes.submit}
